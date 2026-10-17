@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ICT 9th Grade - Interactive Learning Hub</title>
+  <title>ICT 9th Grade - Teacher Narankhuu B</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
@@ -28,7 +28,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
     body { background: var(--bg); color: var(--text); min-height: 100vh; padding-bottom: 50px; transition: background 0.3s, color 0.3s; }
 
-    /* MODERN GLASS HEADER STYLES */
+    /* HEADER STYLES */
     header {
       background: rgba(15, 23, 42, 0.8);
       backdrop-filter: blur(20px);
@@ -52,9 +52,8 @@
     }
     @keyframes shineText { to { background-position: 200% center; } }
 
-    /* WIDER & EXTENDED NAV TABS */
     .nav-tabs {
-      flex: 3.2; /* Урт сунаж харагдахаар flex харьцааг нэмэгдүүлсэн */
+      flex: 3.5;
       display: flex; justify-content: space-between; align-items: center; gap: 6px;
       background: rgba(0, 0, 0, 0.3);
       padding: 6px 8px; border-radius: 999px;
@@ -64,19 +63,14 @@
     }
 
     .tab-btn {
-      flex: 1; /* Товчлуур бүр тэгш хэмтэй урт сунана */
-      padding: 10px 20px; border: none; background: transparent;
+      flex: 1;
+      padding: 10px 14px; border: none; background: transparent;
       color: var(--text-muted); font-weight: 700; cursor: pointer; border-radius: 999px;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap; font-size: 0.92rem;
-      display: flex; align-items: center; justify-content: center; gap: 8px; position: relative;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap; font-size: 0.88rem;
+      display: flex; align-items: center; justify-content: center; gap: 6px; position: relative;
     }
 
-    .tab-btn:hover {
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.08);
-      transform: translateY(-1px);
-    }
-
+    .tab-btn:hover { color: var(--text); background: rgba(255, 255, 255, 0.08); transform: translateY(-1px); }
     .tab-btn.active {
       background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
       color: #0f172a;
@@ -124,24 +118,31 @@
     .flashcard { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 15px; cursor: pointer; min-height: 110px; display: flex; flex-direction: column; justify-content: space-between; }
     .flashcard.answered { opacity: 0.5; border-color: var(--accent-green); }
 
-    /* QUIZ SNAKE STYLES */
-    .snake-wrapper { display: flex; flex-direction: column; align-items: center; }
-    .snake-card { width: 100%; max-width: 700px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 20px; text-align: center; margin-bottom: 15px; }
-    .snake-legend { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 10px; }
-    .snake-legend-item { font-size: 0.95rem; font-weight: 700; padding: 6px 14px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); }
-    canvas#snakeCanvas { background: #020617; border: 3px solid var(--border); border-radius: 16px; transition: border-color 0.2s; }
-    .snake-controls { display: grid; grid-template-columns: repeat(3, 55px); grid-template-rows: repeat(2, 45px); gap: 8px; margin-top: 15px; }
-    .s-ctrl-btn { background: var(--card-bg); border: 1px solid var(--border); color: var(--text); font-size: 1.1rem; font-weight: 800; border-radius: 8px; cursor: pointer; display: flex; justify-content: center; align-items: center; }
-    .snake-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.92); backdrop-filter: blur(8px); border-radius: 16px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 15px; z-index: 10; }
-
-    /* TECH NEWS STYLES WITH EMBEDDED VIDEO SUPPORT */
+    /* TECH NEWS STYLES */
     .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
     .news-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; }
     .news-date { font-size: 0.8rem; color: var(--accent-yellow); font-weight: 700; margin-bottom: 6px; }
     .news-title { font-size: 1.15rem; font-weight: 800; margin-bottom: 12px; color: var(--accent-blue); }
+    .news-img { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 12px; border: 1px solid var(--border); }
     .news-video-box { width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 10px; overflow: hidden; margin-bottom: 14px; border: 1px solid var(--border); }
     .news-video-box iframe { width: 100%; height: 100%; border: none; }
     .news-body { font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; white-space: pre-line; }
+
+    /* REPORT & VISITOR STATS STYLES */
+    .report-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 20px; }
+    .stat-card { background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border); border-radius: 12px; padding: 14px; text-align: center; }
+    .stat-num { font-size: 1.5rem; font-weight: 800; color: var(--accent-blue); margin-top: 4px; }
+    .report-table { width: 100%; border-collapse: collapse; margin-top: 12px; background: rgba(0,0,0,0.2); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+    .report-table th, .report-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+    .report-table th { background: rgba(0, 0, 0, 0.4); color: var(--accent-blue); font-weight: 800; }
+
+    /* GAME CONTAINERS (BIRD & SNAKE) */
+    .game-wrapper { display: flex; flex-direction: column; align-items: center; }
+    .game-card { width: 100%; max-width: 700px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 20px; text-align: center; margin-bottom: 15px; }
+    canvas.game-canvas { background: #020617; border: 3px solid var(--border); border-radius: 16px; cursor: crosshair; }
+    .snake-controls { display: grid; grid-template-columns: repeat(3, 55px); grid-template-rows: repeat(2, 45px); gap: 8px; margin-top: 15px; }
+    .s-ctrl-btn { background: var(--card-bg); border: 1px solid var(--border); color: var(--text); font-size: 1.1rem; font-weight: 800; border-radius: 8px; cursor: pointer; display: flex; justify-content: center; align-items: center; }
+    .game-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.92); backdrop-filter: blur(8px); border-radius: 16px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 15px; z-index: 10; }
 
     /* MATCHING & WORDLE & QUIZ */
     .matching-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 800px; margin: 0 auto; }
@@ -160,7 +161,7 @@
     /* MODAL & ADMIN STYLES */
     .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 1000; justify-content: center; align-items: center; }
     .modal.active { display: flex; }
-    .modal-content { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; width: 90%; max-width: 650px; max-height: 85vh; overflow-y: auto; padding: 25px; position: relative; }
+    .modal-content { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; width: 90%; max-width: 780px; max-height: 85vh; overflow-y: auto; padding: 25px; position: relative; }
     .close-modal { position: absolute; top: 15px; right: 15px; background: none; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer; }
     .admin-nav { display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px; overflow-x: auto; }
     .admin-tab-btn { background: transparent; border: 1px solid var(--border); color: var(--text-muted); padding: 6px 12px; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.8rem; white-space: nowrap; }
@@ -170,18 +171,19 @@
     .admin-item { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); border-radius: 8px; padding: 10px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
     .admin-input { width: 100%; padding: 8px; background: rgba(0,0,0,0.2); color: var(--text); border: 1px solid var(--border); border-radius: 6px; margin-bottom: 8px; }
     .del-btn { background: var(--accent-red); color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; font-weight:700; flex-shrink: 0; }
+    .edit-btn { background: var(--accent-blue); color: #000; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; font-weight:800; flex-shrink: 0; }
   </style>
 </head>
 <body data-theme="slate">
 
   <header>
-    <div class="logo">⚡ ICT 9th Grade</div>
+    <div class="logo">⚡ICT IGCSE 9th Grade - Teacher Narankhuu B</div>
     
-    <!-- EXTENDED MODERN CENTERED NAV TABS -->
     <div class="nav-tabs">
       <button class="tab-btn active" onclick="switchTab('wheels')">🎡 Хүрд</button>
-      <button class="tab-btn" onclick="switchTab('snake')">🐍 Quiz Snake</button>
       <button class="tab-btn" onclick="switchTab('news')">📰 Техно Мэдээ</button>
+      <button class="tab-btn" onclick="switchTab('bird')">🎯 Шувуу онох</button>
+      <button class="tab-btn" onclick="switchTab('snake')">🐍 Quiz Snake</button>
       <button class="tab-btn" onclick="switchTab('matching')">🔗 Холбох</button>
       <button class="tab-btn" onclick="switchTab('word')">🧩 Үг таах</button>
       <button class="tab-btn" onclick="switchTab('speed')">⚡ Speed Quiz</button>
@@ -240,22 +242,53 @@
       <div class="flashcard-grid" id="flashcard-container"></div>
     </div>
 
-    <!-- TAB 2: QUIZ SNAKE -->
+    <!-- TAB 2: TECH NEWS & VIDEOS -->
+    <div id="tab-news" class="tab-content">
+      <div class="section-title">📰 Технологийн Сүүлийн Үеийн Мэдээ Мэдээлэл</div>
+      <div class="news-grid" id="news-container"></div>
+    </div>
+
+    <!-- TAB 3: BIRD SHOOTER GAME -->
+    <div id="tab-bird" class="tab-content">
+      <div class="section-title">🎯 Шувуу Онох Тоглоом (9-р анги)</div>
+      <div class="game-wrapper">
+        <div class="game-card">
+          <div style="display:flex; justify-content:space-around; font-weight:800; font-size:1.1rem; margin-bottom:10px;">
+            <div>🎯 Оноо: <span id="bird-score" style="color:var(--accent-green);">0</span></div>
+            <div>❤️ Амь: <span id="bird-lives" style="color:var(--accent-red);">❤️❤️❤️</span></div>
+          </div>
+          <div style="font-size:1.2rem; font-weight:800; color:var(--accent-yellow);" id="bird-q-text">Асуулт уншиж байна...</div>
+        </div>
+
+        <div style="position:relative; width:100%; max-width:600px;">
+          <canvas id="birdCanvas" class="game-canvas" width="600" height="400" onclick="handleBirdClick(event)"></canvas>
+          <div class="game-overlay" id="bird-overlay">
+            <h1 id="bird-ov-title" style="color:var(--accent-blue);">🦅 Bird Shooter Quiz</h1>
+            <p id="bird-ov-sub" style="color:var(--text-muted); text-align:center; max-width:400px;">
+              Нисэж буй шувуудын **ЗӨВ ХАРИУЛТТАЙ** дээр нь тавьж онон (кликдэж) оноогоо цуглуулаарай!
+            </p>
+            <button class="spin-btn" style="max-width:220px;" onclick="startBirdGame()">🎮 Тоглоом Эхлүүлэх</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: QUIZ SNAKE -->
     <div id="tab-snake" class="tab-content">
       <div class="section-title">🐍 Quiz Snake (Мэдлэгтэй Могой)</div>
-      <div class="snake-wrapper">
-        <div class="snake-card">
+      <div class="game-wrapper">
+        <div class="game-card">
           <div style="display:flex; justify-content:space-around; font-weight:800; font-size:1.1rem; margin-bottom:10px;">
             <div>🎯 Оноо: <span id="snake-score" style="color:var(--accent-green);">0</span></div>
             <div>❤️ Амь: <span id="snake-lives" style="color:var(--accent-red);">❤️❤️❤️</span></div>
           </div>
           <div style="font-size:1.2rem; font-weight:800; color:var(--accent-yellow);" id="snake-q-text">Асуулт уншиж байна...</div>
-          <div class="snake-legend" id="snake-legend"></div>
+          <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-top:10px;" id="snake-legend"></div>
         </div>
 
         <div style="position:relative; width:100%; max-width:600px;">
-          <canvas id="snakeCanvas" width="600" height="400"></canvas>
-          <div class="snake-overlay" id="snake-overlay">
+          <canvas id="snakeCanvas" class="game-canvas" width="600" height="400"></canvas>
+          <div class="game-overlay" id="snake-overlay">
             <h1 id="snake-ov-title" style="color:var(--accent-green);">🐍 Quiz Snake</h1>
             <p id="snake-ov-sub" style="color:var(--text-muted); text-align:center; max-width:400px;">
               Могойгоо суман товчлуураар чиглүүлэн **ЗӨВ ХАРИУЛТТАЙ** хоолыг идэж оноогоо цуглуулаарай!
@@ -275,24 +308,18 @@
       </div>
     </div>
 
-    <!-- TAB 3: TECH NEWS & VIDEOS -->
-    <div id="tab-news" class="tab-content">
-      <div class="section-title">📰 Технологийн Шинэ Мэдээ ба Бичлэгүүд</div>
-      <div class="news-grid" id="news-container"></div>
-    </div>
-
-    <!-- TAB 4: MATCHING GAME -->
+    <!-- TAB 5: MATCHING GAME -->
     <div id="tab-matching" class="tab-content">
-      <div class="section-title">🔗 9-р ангийн Нэр томьёо ба Кодын холбоос</div>
+      <div class="section-title">🔗 9-р ангийн Нэр томьёоны холбоос</div>
       <div class="matching-container">
         <div class="match-column" id="match-left"></div>
         <div class="match-column" id="match-right"></div>
       </div>
     </div>
 
-    <!-- TAB 5: WORDLE -->
+    <!-- TAB 6: WORDLE -->
     <div id="tab-word" class="tab-content">
-      <div class="section-title">🧩 Мэдээлэл зүйн нэр томьёо таах</div>
+      <div class="section-title">🧩 Мэдээлэл зүйн нэр томьёо таах (9-р анги)</div>
       <div class="word-game-box">
         <div class="word-hint" id="word-hint" style="color:var(--accent-blue); margin-bottom:15px;">---</div>
         <div class="word-display" id="word-display">_ _ _ _</div>
@@ -301,7 +328,7 @@
       </div>
     </div>
 
-    <!-- TAB 6: SPEED QUIZ -->
+    <!-- TAB 7: SPEED QUIZ -->
     <div id="tab-speed" class="tab-content">
       <div class="section-title">⚡ Speed Quiz (9-р анги)</div>
       <div class="quiz-box">
@@ -316,23 +343,123 @@
 
   </div>
 
-  <!-- TEACHER ONLY ADMIN MODAL -->
+  <!-- SECURE TEACHER ONLY ADMIN MODAL -->
   <div class="modal" id="adminModal">
     <div class="modal-content">
       <button class="close-modal" onclick="closeAdmin()">&times;</button>
       <h2>⚙️ Багшийн Админ Удирдлага (9-р анги)</h2>
-      <p style="color:var(--text-muted); margin-bottom:15px; font-size:0.85rem;">Асуулт, сурагчид, мэдээ ба бичлэгүүдийг удирдана</p>
+      <p style="color:var(--text-muted); margin-bottom:15px; font-size:0.85rem;">Асуулт засах, техно мэдээ оруулж засах, сурагчид ба хандалтын тайлангийн хэсэг</p>
 
       <div class="admin-nav">
-        <button class="admin-tab-btn active" onclick="switchAdminSection('students')">👨‍🎓 Сурагчид</button>
+        <button class="admin-tab-btn active" onclick="switchAdminSection('reports')">📊 Тайлан & Журнал</button>
+        <button class="admin-tab-btn" onclick="switchAdminSection('news')">📰 Мэдээ Нэмэх & Засах</button>
+        <button class="admin-tab-btn" onclick="switchAdminSection('questions')">❓ Асуултууд Засах</button>
+        <button class="admin-tab-btn" onclick="switchAdminSection('students')">👨‍🎓 Сурагчид</button>
         <button class="admin-tab-btn" onclick="switchAdminSection('chapters')">📂 Бүлэг засах</button>
-        <button class="admin-tab-btn" onclick="switchAdminSection('questions')">❓ Асуултууд</button>
-        <button class="admin-tab-btn" onclick="switchAdminSection('snake')">🐍 Могойн Асуулт</button>
-        <button class="admin-tab-btn" onclick="switchAdminSection('news')">📰 Мэдээ & Видео Нэмэх</button>
+        <button class="admin-tab-btn" onclick="switchAdminSection('snake')">🐍 Тоглоомын Асуулт</button>
+      </div>
+
+      <!-- Admin: Reports (Visitor Stats & Page-Level Tracking) -->
+      <div id="admin-reports" class="admin-section active">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; flex-wrap:wrap; gap:10px;">
+          <h3 style="color:var(--accent-blue);">👁️ Вэб Хандалтын Статистик (Өдөр / Сар / Он)</h3>
+          <div style="display:flex; gap:8px;">
+            <button class="spin-btn" style="padding:6px 12px; font-size:0.85rem; background:linear-gradient(135deg, var(--accent-green), #16a34a); color:#fff;" onclick="exportReportToCSV()">📥 CSV Татах</button>
+            <button class="del-btn" style="padding:6px 12px; font-size:0.85rem;" onclick="clearReportHistory()">🗑️ Журнал цэвэрлэх</button>
+          </div>
+        </div>
+
+        <div class="report-grid">
+          <div class="stat-card">
+            <div style="font-size:0.8rem; color:var(--text-muted); font-weight:700;">📅 Өнөөдөр</div>
+            <div class="stat-num" style="color:var(--accent-green);" id="rep-views-today">0</div>
+          </div>
+          <div class="stat-card">
+            <div style="font-size:0.8rem; color:var(--text-muted); font-weight:700;">📆 Энэ сар</div>
+            <div class="stat-num" style="color:var(--accent-blue);" id="rep-views-month">0</div>
+          </div>
+          <div class="stat-card">
+            <div style="font-size:0.8rem; color:var(--text-muted); font-weight:700;">🗓️ Энэ он</div>
+            <div class="stat-num" style="color:var(--accent-yellow);" id="rep-views-year">0</div>
+          </div>
+          <div class="stat-card">
+            <div style="font-size:0.8rem; color:var(--text-muted); font-weight:700;">👁️ Нийт хандалт</div>
+            <div class="stat-num" style="color:var(--accent-purple);" id="rep-views-total">0</div>
+          </div>
+        </div>
+
+        <!-- NEW: PAGE LEVEL TRACKING TABLE -->
+        <h4 style="margin-top:20px; margin-bottom:8px; color:var(--accent-purple);">📊 Аль хуудас / цэсэнд хамгийн их хандсан бэ?</h4>
+        <table class="report-table" style="margin-bottom:20px;">
+          <thead>
+            <tr>
+              <th>Цэсний нэр (Хуудас)</th>
+              <th>Үзсэн тоо</th>
+            </tr>
+          </thead>
+          <tbody id="page-views-tbody">
+            <tr><td colspan="2" style="text-align:center; color:var(--text-muted);">Хуудасны өгөгдөл алга.</td></tr>
+          </tbody>
+        </table>
+
+        <h4 style="margin-top:15px; margin-bottom:8px; color:var(--accent-blue);">📅 Өдөр тутмын хандалтын түүх</h4>
+        <table class="report-table" style="margin-bottom:25px;">
+          <thead>
+            <tr>
+              <th>Огноо (ЖЖЖЖ-САР-ӨДӨР)</th>
+              <th>Тухайн өдрийн хандалтын тоо</th>
+            </tr>
+          </thead>
+          <tbody id="daily-views-tbody">
+            <tr><td colspan="2" style="text-align:center; color:var(--text-muted);">Хандалтын өгөгдөл одоогоор алга.</td></tr>
+          </tbody>
+        </table>
+
+        <hr style="border-color: var(--border); margin: 20px 0;">
+
+        <h3 style="color:var(--accent-yellow); margin-bottom:12px;">🕒 9-р ангийн Журнал ба Хариултын Түүх</h3>
+        <table class="report-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Анги</th>
+              <th>Сурагчийн нэр</th>
+              <th>Асуултын №</th>
+              <th>Асуулт</th>
+              <th>Цаг</th>
+            </tr>
+          </thead>
+          <tbody id="report-history-tbody">
+            <tr><td colspan="6" style="text-align:center; color:var(--text-muted);">Одоогоор хариулсан сурагч байхгүй байна.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Admin: News & Video (ADD, EDIT, DELETE) -->
+      <div id="admin-news" class="admin-section">
+        <h3>📰 Техно Мэдээ Нэмэх & Засах</h3>
+        <input type="text" id="new-n-title" placeholder="Гарчиг (Жишээ: Python хэл дээр AI бичих нь)" class="admin-input">
+        <input type="text" id="new-n-img" placeholder="Зургийн линк URL (Заавал биш)" class="admin-input">
+        <input type="text" id="new-n-url" placeholder="YouTube бичлэгийн линк URL (Заавал биш)" class="admin-input">
+        <textarea id="new-n-body" rows="4" placeholder="Нийтлэлийн дэлгэрэнгүй эх текст..." class="admin-input"></textarea>
+        <button class="spin-btn" onclick="addNews()">➕ Мэдээ Хадгалах</button>
+        <hr style="border-color: var(--border); margin: 20px 0;">
+        <div id="admin-news-list"></div>
+      </div>
+
+      <!-- Admin: Wheel Questions (Add, Edit, Delete) -->
+      <div id="admin-questions" class="admin-section">
+        <h3>Асуулт Нэмэх ба Засах</h3>
+        <input type="text" id="new-q-chapter" placeholder="Жишээ: Бүлэг 1: Вэб бүтээх (HTML/CSS)" class="admin-input">
+        <input type="text" id="new-q-text" placeholder="Асуултын бичвэр" class="admin-input">
+        <input type="text" id="new-q-ans" placeholder="Зөв хариулт" class="admin-input">
+        <button class="spin-btn" onclick="addQuestion()">➕ Шинэ Асуулт Нэмэх</button>
+        <hr style="border-color: var(--border); margin: 20px 0;">
+        <div id="admin-questions-list"></div>
       </div>
 
       <!-- Admin: Students -->
-      <div id="admin-students" class="admin-section active">
+      <div id="admin-students" class="admin-section">
         <label style="font-weight:600; display:block; margin-bottom:5px;">Анги сонгох:</label>
         <select id="admin-class-select" onchange="loadAdminStudents()" class="admin-input">
           <option value="9A">9А бүлэг</option>
@@ -347,21 +474,9 @@
         <div id="admin-chapters-list"></div>
       </div>
 
-      <!-- Admin: Wheel Questions -->
-      <div id="admin-questions" class="admin-section">
-        <h3>Шинэ Асуулт Нэмэх</h3>
-        <input type="text" id="new-q-chapter" list="chapter-suggestions" placeholder="Жишээ: Бүлэг 1: Python Дата Төрөл" class="admin-input">
-        <datalist id="chapter-suggestions"></datalist>
-        <input type="text" id="new-q-text" placeholder="Асуулт" class="admin-input">
-        <input type="text" id="new-q-ans" placeholder="Зөв хариулт" class="admin-input">
-        <button class="spin-btn" onclick="addQuestion()">➕ Асуулт Нэмэх</button>
-        <hr style="border-color: var(--border); margin: 20px 0;">
-        <div id="admin-questions-list"></div>
-      </div>
-
-      <!-- Admin: Snake Questions -->
+      <!-- Admin: Snake & Bird Questions -->
       <div id="admin-snake" class="admin-section">
-        <h3>🐍 Могойн Асуулт Нэмэх</h3>
+        <h3>🐍 Тоглоомын Асуулт Нэмэх</h3>
         <input type="text" id="new-sq-text" placeholder="Асуулт" class="admin-input">
         <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
           <input type="radio" name="sqCorrect" value="0" checked>
@@ -378,17 +493,6 @@
         <button class="spin-btn" onclick="addSnakeQuestion()">➕ Асуулт Хадгалах</button>
         <hr style="border-color: var(--border); margin: 20px 0;">
         <div id="admin-snake-list"></div>
-      </div>
-
-      <!-- Admin: News & Video -->
-      <div id="admin-news" class="admin-section">
-        <h3>📰 Шинэ Мэдээ ба Бичлэг Нэмэх</h3>
-        <input type="text" id="new-n-title" placeholder="Гарчиг (Жишээ: AI технологи эсвэл 1000-ны бодлогын алгоритм)" class="admin-input">
-        <input type="text" id="new-n-url" placeholder="YouTube бичлэгийн линк (Заавал биш, жишээ: https://www.youtube.com/...)" class="admin-input">
-        <textarea id="new-n-body" rows="4" placeholder="Нийтлэлийн агуулга, хичээлийн тайлбар болон дэлгэрэнгүй мэдээлэл..." class="admin-input"></textarea>
-        <button class="spin-btn" onclick="addNews()">➕ Мэдээ/Бичлэг Хадгалах</button>
-        <hr style="border-color: var(--border); margin: 20px 0;">
-        <div id="admin-news-list"></div>
       </div>
 
     </div>
@@ -411,6 +515,27 @@
   </div>
 
   <script>
+    // ADVANCED DATE-BASED VISITOR TRACKING LOGIC
+    const todayStr = new Date().toISOString().split('T')[0]; // "YYYY-MM-DD"
+    let dailyViewsMap = JSON.parse(localStorage.getItem('ict9_daily_views') || '{}');
+    dailyViewsMap[todayStr] = (dailyViewsMap[todayStr] || 0) + 1;
+    localStorage.setItem('ict9_daily_views', JSON.stringify(dailyViewsMap));
+
+    // PAGE-LEVEL SPECIFIC TRACKING LOGIC
+    let pageViewsMap = JSON.parse(localStorage.getItem('ict9_page_views') || '{}');
+    pageViewsMap['wheels'] = (pageViewsMap['wheels'] || 0) + 1; // Count home/wheel tab load
+    localStorage.setItem('ict9_page_views', JSON.stringify(pageViewsMap));
+
+    const tabNameMap = {
+      'wheels': '🎡 Асуултын Хүрд',
+      'news': '📰 Техно Мэдээ',
+      'bird': '🎯 Шувуу Онох',
+      'snake': '🐍 Quiz Snake',
+      'matching': '🔗 Холбох Тоглоом',
+      'word': '🧩 Үг Таах',
+      'speed': '⚡ Speed Quiz'
+    };
+
     // SOUND ENGINE
     let soundEnabled = true, audioCtx = null;
     function initAudio() { if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)(); if(audioCtx.state === 'suspended') audioCtx.resume(); }
@@ -422,7 +547,7 @@
         const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
         osc.connect(gain); gain.connect(audioCtx.destination);
         const now = audioCtx.currentTime;
-        if(type === 'eat') {
+        if(type === 'eat' || type === 'hit') {
           osc.type = 'sine'; osc.frequency.setValueAtTime(523, now); osc.frequency.exponentialRampToValueAtTime(880, now + 0.1);
           gain.gain.setValueAtTime(0.2, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.1); osc.start(now); osc.stop(now + 0.1);
         } else if(type === 'spin') {
@@ -439,62 +564,64 @@
 
     // DEFAULT DATA FOR GRADE 9
     const defaultStudents = {
-      '9A': ["Алимаа", "Баярмаа", "Билгүүн", "Ганзориг", "Дөлгөөн", "Есүй", "Золбоо", "Индра", "Мөнх-Очир", "Нарангоо", "Оргил", "Өлзий", "Содном", "Тэмүүлэн", "Урангоо", "Халиун", "Цэлмэг", "Чингүүн", "Шинэбаяр", "Энхжин"],
-      '9Б': ["Алтанбагана", "Болор", "Баяржаргал", "Гэгээн", "Давхарбаяр", "Есөн-Эрдэнэ", "Зоригт", "Идэр", "Мөнхжин", "Номин", "Оюун-Эрдэнэ", "Пүрэвжав", "Сүхбат", "Төгөлдөр", "Уянга", "Хүслэн", "Цогт", "Шижир", "Эрдэнэбулган"]
+      '9A': ["Алтангэрэл", "Бат-Очир", "Билгүүн", "Ганбат", "Дөлгөөнтамир", "Есөн-Эрдэнэ", "Золжаргал", "Илчбаатар", "Мөнх-Оргил", "Наранбаатар", "Оюунболд", "Өлзийбаяр", "Содбилэг", "Тэмүүлэн", "Уранзаяа", "Халиунаа", "Цэлмэг", "Чингүүн", "Шинэбаяр", "Энхжин"],
+      '9Б': ["Анужин", "Болормаа", "Баярмагнай", "Гэгээнжин", "Давхарбаяр", "Есүй", "Зоригтбаатар", "Идэржавхлан", "Мөнхзул", "Номин-Эрдэнэ", "Оюундарь", "Пүрэвдорж", "Сүхбат", "Төгөлдөр", "Уянга", "Хүслэн", "Цогтбаатар", "Шижирболд", "Эрдэнэбулган"]
     };
 
     const defaultQuestions = [
-      { id: 1, chapter: "Бүлэг 1: Python Дата Төрөл", q: "Python-д олон утгыг дарааллуулан хадгалах, өөрчилж болох дата төрлийг юу гэх вэ?", a: "Жагсаалт (List)" },
-      { id: 2, chapter: "Бүлэг 1: Python Дата Төрөл", q: "Python дээр функц тодорхойлоход ямар түлхүүр үг ашигладаг вэ?", a: "def түлхүүр үг" },
-      { id: 3, chapter: "Бүлэг 2: Вэб Хөгжүүлэлт (CSS)", q: "Вэб хуудасны хэв маяг, өнгө, дүрслэлийг тодорхойлдог хэл юу вэ?", a: "CSS (Cascading Style Sheets)" },
-      { id: 4, chapter: "Бүлэг 3: Кибер Нууцлал", q: "Сүлжээгээр дамжиж буй өгөгдлийг шифрлэж аюулгүй байдлыг хангадаг протокол аль нь вэ?", a: "HTTPS протокол" }
-    ];
-
-    const defaultSnakeQuestions = [
-      {
-        q: "Python дээр Жагсаалт (List) үүсгэхдээ ямар хаалт ашигладаг вэ?",
-        options: [{ text: "[ ] Дөрвөлжин хаалт", correct: true }, { text: "( ) Дугуй хаалт", correct: false }, { text: "{ } Цохилуур хаалт", correct: false }]
-      },
-      {
-        q: "HTML дээр зургийн файл оруулах таг аль нь вэ?",
-        options: [{ text: "<img>", correct: true }, { text: "<picture>", correct: false }, { text: "<src>", correct: false }]
-      },
-      {
-        q: "CSS-д элементийн дотор зайн хэмжээг тохируулдаг атрибут юу вэ?",
-        options: [{ text: "padding", correct: true }, { text: "margin", correct: false }, { text: "border", correct: false }]
-      }
+      { id: 1, chapter: "Бүлэг 1: Вэб бүтээх (HTML/CSS)", q: "HTML дээр вэб хуудасны эх ба төгсгөлийг заагладаг шошго аль нь вэ?", a: "<html> ба </html> шошго" },
+      { id: 2, chapter: "Бүлэг 2: Өгөгдлийн сан (MS Access)", q: "Өгөгдлийн санд бичлэг бүрийг дахин давтагдашгүйгээр тодорхойлдог түлхүүрийг юу гэх вэ?", a: "Анхдагч түлхүүр (Primary Key)" },
+      { id: 3, chapter: "Бүлэг 3: Ахисан шатны Excel", q: "MS Excel дээр тодорхой нөхцөлд тохирсон нүднүүдийг онцлон будах боломжийг юу гэдэг вэ?", a: "Нөхцөлт форматжуулалт (Conditional Formatting)" },
+      { id: 4, chapter: "Бүлэг 4: Програмчлал (Python)", q: "Python хэл дээр дэлгэцэнд мэдээлэл хэвлэн гаргах функц аль нь вэ?", a: "print() функц" }
     ];
 
     const defaultNews = [
       {
         id: 1,
-        date: "2026-10-14",
-        title: "🤖 Хиймэл интеллект ба Ирээдүйн Программистууд",
+        date: "2026-10-17",
+        title: "🚀 Хиймэл Тэнгэр ба Хиймэл Оюун Ухааны хөгжил",
+        imgUrl: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600",
         videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        body: "Мэдээллийн технологийн салбарт хиймэл интеллект (AI) маш хурдацтай хөгжиж байна. 9-р ангийн сурагчдын хувьд зөвхөн код бичихээс гадна аналитик сэтгэлгээ ба логик алгоритм хөгжүүлэх нь хамгийн чухал ур чадвар болж байна."
+        body: "Мэдээллийн технологийн салбарт хиймэл оюун ухаан хурдацтай хөгжиж байна. Python хэл болон өгөгдлийн санг ашиглан сурагчид ирээдүйн технологийн шийдлүүдийг бүтээх боломжтой боллоо."
+      }
+    ];
+
+    const defaultSnakeQuestions = [
+      {
+        q: "HTML дээр вэб хуудасны гарчигийг тодорхойлдог шошго аль нь вэ?",
+        options: [{ text: "🏷️ <title>", correct: true }, { text: "📦 <body>", correct: false }, { text: "🔗 <a>", correct: false }]
+      },
+      {
+        q: "Python хэл дээр гараас утга авахад ямар функц ашигладаг вэ?",
+        options: [{ text: "⌨️ input()", correct: true }, { text: "🖨️ print()", correct: false }, { text: "📊 len()", correct: false }]
+      },
+      {
+        q: "Өгөгдлийн сангийн хүснэгт хоорондын холбоосыг юу гэдэг вэ?",
+        options: [{ text: "🔗 Relationship (Холбоос)", correct: true }, { text: "📁 Query (Хүсэлт)", correct: false }, { text: "📄 Form (Маягт)", correct: false }]
       }
     ];
 
     const defaultMatchPairs = [
-      { left: "List [ ]", right: "Өөрчилж болох цуглуулга" },
-      { left: "Tuple ( )", right: "Өөрчлөгддөггүй тогтмол цуглуулга" },
-      { left: "CSS Flexbox", right: "Элементүүдийн байршил тохируулах" },
-      { left: "HTTPS", right: "Шифрлэгдсэн аюулгүй сүлжээ" }
+      { left: "<html>", right: "Вэб хуудасны эхлэл шошго" },
+      { left: "Primary Key", right: "Анхдагч түлхүүр" },
+      { left: "print()", right: "Python дэлгэцэнд хэвлэх функц" },
+      { left: "SQL", right: "Өгөгдлийн сангийн хүсэлтийн хэл" }
     ];
 
     const defaultWordList = [
-      { word: "FUNCTION", hint: "Кодыг дахин ашиглах блокон бүтэц" },
-      { word: "DATABASE", hint: "Зохион байгуулалттай өгөгдлийн сан" },
-      { word: "ENCRYPTION", hint: "Мэдээллийг шифрлэж нууцлах үйл явц" }
+      { word: "DATABASE", hint: "Зохион байгуулалттай өгөгдлийн цуглуулга" },
+      { word: "PYTHON", hint: "Орчин үеийн хялбар кодчилолын хэл" },
+      { word: "HYPERLINK", hint: "Вэб хуудаснуудыг холбох холбоос" }
     ];
 
     let currentClass = '9A', currentChapterFilter = 'ALL', currentTheme = localStorage.getItem('ict9_theme') || 'slate';
     let students = JSON.parse(localStorage.getItem('ict9_students')) || defaultStudents;
     let questions = JSON.parse(localStorage.getItem('ict9_questions')) || defaultQuestions;
-    let snakeQuestions = JSON.parse(localStorage.getItem('ict9_snake_questions')) || defaultSnakeQuestions;
     let news = JSON.parse(localStorage.getItem('ict9_news')) || defaultNews;
+    let snakeQuestions = JSON.parse(localStorage.getItem('ict9_snake_questions')) || defaultSnakeQuestions;
     let matchPairs = JSON.parse(localStorage.getItem('ict9_match_pairs')) || defaultMatchPairs;
     let wordList = JSON.parse(localStorage.getItem('ict9_word_list')) || defaultWordList;
+    let reportHistory = JSON.parse(localStorage.getItem('ict9_report_history')) || [];
 
     let activeStudents = [...(students[currentClass] || [])];
     let activeQuestions = [...questions];
@@ -613,8 +740,21 @@
       document.getElementById('resultModal').classList.add('active');
     }
 
-    // REMOVE BOTH STUDENT AND QUESTION IF ANSWERED CORRECTLY
+    // REMOVE BOTH STUDENT AND QUESTION AND RECORD HISTORY REPORT
     function markBothAnswered() {
+      if(currentSelectedStudent && currentSelectedQuestion) {
+        let nowTime = new Date().toLocaleTimeString('mn-MN', { hour: '2-digit', minute: '2-digit' });
+        reportHistory.unshift({
+          id: reportHistory.length + 1,
+          class: currentClass,
+          student: currentSelectedStudent,
+          qId: currentSelectedQuestion.id,
+          question: currentSelectedQuestion.q,
+          time: nowTime
+        });
+        localStorage.setItem('ict9_report_history', JSON.stringify(reportHistory));
+      }
+
       if(currentSelectedStudent) {
         activeStudents = activeStudents.filter(s => s !== currentSelectedStudent);
       }
@@ -655,7 +795,233 @@
     function resetQuestions() { activeQuestions = getFilteredQuestions(); drawWheel('questionWheel', activeQuestions, wheelAngles.questionWheel); renderCards(); }
     function closeResult() { document.getElementById('resultModal').classList.remove('active'); }
 
-    // QUIZ SNAKE ENGINE
+    // YOUTUBE HELPER FUNCTION
+    function getYouTubeEmbedUrl(url) {
+      if(!url) return null;
+      let match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+      return match && match[1] ? `https://www.youtube.com/embed/${match[1]}` : null;
+    }
+
+    // TECH NEWS RENDER
+    function renderNews() {
+      const container = document.getElementById('news-container'); container.innerHTML = '';
+      if(news.length === 0) { container.innerHTML = '<div style="color:var(--text-muted)">Одоогоор мэдээ оруулаагүй байна.</div>'; return; }
+      news.forEach(n => {
+        const embedUrl = getYouTubeEmbedUrl(n.videoUrl);
+        const card = document.createElement('div'); card.className = 'news-card';
+        card.innerHTML = `
+          <div>
+            <div class="news-date">📅 ${n.date}</div>
+            <div class="news-title">${n.title}</div>
+            ${n.imgUrl ? `<img src="${n.imgUrl}" class="news-img" alt="news">` : ''}
+            ${embedUrl ? `
+              <div class="news-video-box">
+                <iframe src="${embedUrl}" allowfullscreen></iframe>
+              </div>` : ''}
+            <div class="news-body">${n.body}</div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // SECURE REPORT MODULE & VISITOR STATS
+    function renderReports() {
+      const curToday = new Date().toISOString().split('T')[0];
+      const curMonth = curToday.substring(0, 7);
+      const curYear = curToday.substring(0, 4);
+
+      let viewsToday = dailyViewsMap[curToday] || 0;
+      let viewsMonth = 0;
+      let viewsYear = 0;
+      let viewsTotal = 0;
+
+      Object.keys(dailyViewsMap).forEach(dateKey => {
+        let count = dailyViewsMap[dateKey];
+        viewsTotal += count;
+        if(dateKey.startsWith(curMonth)) viewsMonth += count;
+        if(dateKey.startsWith(curYear)) viewsYear += count;
+      });
+
+      document.getElementById('rep-views-today').innerText = viewsToday;
+      document.getElementById('rep-views-month').innerText = viewsMonth;
+      document.getElementById('rep-views-year').innerText = viewsYear;
+      document.getElementById('rep-views-total').innerText = viewsTotal;
+
+      // Render Page-Level Specific Views Table
+      const pageTbody = document.getElementById('page-views-tbody');
+      pageTbody.innerHTML = '';
+      
+      let sortedPages = Object.keys(tabNameMap).map(pKey => ({
+        key: pKey,
+        name: tabNameMap[pKey],
+        count: pageViewsMap[pKey] || 0
+      })).sort((a,b) => b.count - a.count);
+
+      sortedPages.forEach(p => {
+        let tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td style="font-weight:700;">${p.name}</td>
+          <td style="font-weight:800; color:var(--accent-purple);">${p.count} удаа</td>
+        `;
+        pageTbody.appendChild(tr);
+      });
+
+      // Render Daily Traffic Table
+      const dailyTbody = document.getElementById('daily-views-tbody');
+      dailyTbody.innerHTML = '';
+      const dates = Object.keys(dailyViewsMap).sort().reverse();
+      
+      if(dates.length === 0) {
+        dailyTbody.innerHTML = `<tr><td colspan="2" style="text-align:center; color:var(--text-muted);">Хандалтын өгөгдөл одоогоор алга.</td></tr>`;
+      } else {
+        dates.forEach(dKey => {
+          let tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td style="color:var(--accent-blue); font-weight:700;">📅 ${dKey}</td>
+            <td style="font-weight:800; color:var(--accent-green);">${dailyViewsMap[dKey]} удаа</td>
+          `;
+          dailyTbody.appendChild(tr);
+        });
+      }
+
+      // Render Question History Table
+      const tbody = document.getElementById('report-history-tbody');
+      tbody.innerHTML = '';
+
+      if (reportHistory.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--text-muted);">Одоогоор хариулсан сурагч байхгүй байна.</td></tr>`;
+        return;
+      }
+
+      reportHistory.forEach((item, index) => {
+        let tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${index + 1}</td>
+          <td><b>${item.class}</b></td>
+          <td style="color:var(--accent-blue); font-weight:700;">${item.student}</td>
+          <td>Q${item.qId}</td>
+          <td>${item.question}</td>
+          <td style="color:var(--accent-yellow); font-weight:600;">${item.time}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function exportReportToCSV() {
+      if (reportHistory.length === 0) return alert("Татах тайлангийн өгөгдөл одоогоор алга байна!");
+      let csvContent = "\uFEFF#,Анги,Сурагч,Асуултын №,Асуулт,Цаг\n";
+      reportHistory.forEach((item, i) => {
+        let cleanQ = `"${item.question.replace(/"/g, '""')}"`;
+        csvContent += `${i + 1},${item.class},${item.student},Q${item.qId},${cleanQ},${item.time}\n`;
+      });
+
+      let blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      let url = URL.createObjectURL(blob);
+      let a = document.createElement('a');
+      a.href = url;
+      a.download = `ICT_9th_Grade_Report_${new Date().toISOString().split('T')[0]}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    function clearReportHistory() {
+      if(confirm("Хариулсан сурагчдын журны түүхийг устгах уу?")) {
+        reportHistory = [];
+        localStorage.setItem('ict9_report_history', JSON.stringify(reportHistory));
+        renderReports();
+      }
+    }
+
+    // GAME 1: BIRD SHOOTER QUIZ ENGINE
+    const bCanvas = document.getElementById('birdCanvas');
+    const bCtx = bCanvas.getContext('2d');
+    let bCurrentQIdx = 0, bScore = 0, bLives = 3, isBirdRunning = false, birdLoop = null;
+    let birds = [];
+
+    function loadBirdQuestion() {
+      if(!snakeQuestions.length) return;
+      const q = snakeQuestions[bCurrentQIdx % snakeQuestions.length];
+      document.getElementById('bird-q-text').innerText = `❓ ${q.q}`;
+      birds = [];
+      q.options.forEach((opt, idx) => {
+        birds.push({
+          x: 50 + idx * 170,
+          y: Math.random() * 150 + 100,
+          vx: (Math.random() > 0.5 ? 1 : -1) * (1.5 + Math.random()),
+          vy: Math.sin(idx) * 1.2,
+          radius: 35,
+          text: opt.text,
+          correct: opt.correct,
+          color: ['#38bdf8', '#a855f7', '#22c55e'][idx % 3]
+        });
+      });
+    }
+
+    function startBirdGame() {
+      if(!snakeQuestions.length) return alert("Асуулт одоогоор алга байна!");
+      bScore = 0; bLives = 3; bCurrentQIdx = 0;
+      updateBirdUI();
+      document.getElementById('bird-overlay').style.display = 'none';
+      loadBirdQuestion();
+      isBirdRunning = true;
+      if(birdLoop) clearInterval(birdLoop);
+      birdLoop = setInterval(runBirdLoop, 30);
+    }
+
+    function runBirdLoop() {
+      if(!isBirdRunning) return;
+      bCtx.fillStyle = '#020617'; bCtx.fillRect(0, 0, bCanvas.width, bCanvas.height);
+
+      birds.forEach(b => {
+        b.x += b.vx; b.y += b.vy;
+        if(b.x - b.radius < 0 || b.x + b.radius > bCanvas.width) b.vx *= -1;
+        if(b.y - b.radius < 50 || b.y + b.radius > bCanvas.height - 50) b.vy *= -1;
+
+        bCtx.save();
+        bCtx.fillStyle = b.color;
+        bCtx.shadowBlur = 12; bCtx.shadowColor = b.color;
+        bCtx.beginPath(); bCtx.arc(b.x, b.y, b.radius, 0, Math.PI * 2); bCtx.fill();
+        
+        bCtx.fillStyle = '#ffffff'; bCtx.font = 'bold 12px Plus Jakarta Sans, sans-serif'; bCtx.textAlign = 'center';
+        bCtx.fillText(b.text, b.x, b.y + b.radius + 18);
+        bCtx.font = '22px sans-serif';
+        bCtx.fillText('🦅', b.x, b.y + 7);
+        bCtx.restore();
+      });
+    }
+
+    function handleBirdClick(e) {
+      if(!isBirdRunning) return;
+      const rect = bCanvas.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const clickY = e.clientY - rect.top;
+
+      let hitIdx = birds.findIndex(b => Math.hypot(b.x - clickX, b.y - clickY) <= b.radius + 10);
+      if(hitIdx !== -1) {
+        let hitBird = birds[hitIdx];
+        if(hitBird.correct) {
+          bScore += 100; playSound('hit'); confetti({ particleCount: 35, spread: 50, origin:{y:0.7} });
+          bCurrentQIdx++; loadBirdQuestion();
+        } else {
+          playSound('wrong'); bLives--; updateBirdUI();
+          if(bLives <= 0) {
+            isBirdRunning = false; clearInterval(birdLoop);
+            document.getElementById('bird-ov-title').innerText = "❌ Тоглоом дууслаа!";
+            document.getElementById('bird-ov-sub').innerText = `🏆 Цуглуулсан оноо: ${bScore}`;
+            document.getElementById('bird-overlay').style.display = 'flex';
+          }
+        }
+      }
+    }
+
+    function updateBirdUI() {
+      document.getElementById('bird-score').innerText = bScore;
+      document.getElementById('bird-lives').innerText = '❤️'.repeat(bLives);
+    }
+
+    // GAME 2: QUIZ SNAKE ENGINE
     const sCanvas = document.getElementById('snakeCanvas');
     const sCtx = sCanvas.getContext('2d');
     const sGrid = 20, sTileX = sCanvas.width / sGrid, sTileY = sCanvas.height / sGrid;
@@ -664,9 +1030,7 @@
     const sColors = ['#22c55e', '#38bdf8', '#ef4444', '#a855f7'];
 
     function loadSnakeQuestion() {
-      if(snakeQuestions.length === 0) {
-        document.getElementById('snake-q-text').innerText = "Асуулт байхгүй байна. Админаас нэмнэ үү!"; return;
-      }
+      if(snakeQuestions.length === 0) return;
       const q = snakeQuestions[sCurrentQIdx % snakeQuestions.length];
       document.getElementById('snake-q-text').innerText = `❓ ${q.q}`;
       const legend = document.getElementById('snake-legend'); legend.innerHTML = ''; sFoods = [];
@@ -680,7 +1044,7 @@
         const color = sColors[idx % sColors.length];
         sFoods.push({ x: fX, y: fY, text: opt.text, correct: opt.correct, color: color });
         const item = document.createElement('div');
-        item.className = 'snake-legend-item'; item.style.borderColor = color;
+        item.style.cssText = `font-size:0.9rem; font-weight:700; padding:5px 12px; border-radius:8px; background:rgba(255,255,255,0.05); border:1px solid ${color};`;
         item.innerHTML = `<span style="color:${color};">●</span> ${opt.text}`;
         legend.appendChild(item);
       });
@@ -772,35 +1136,6 @@
       if(e.key === 'ArrowRight' || e.key === 'd') changeSnakeDir('RIGHT');
     });
 
-    // YOUTUBE HELPER FUNCTION
-    function getYouTubeEmbedUrl(url) {
-      if(!url) return null;
-      let match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
-      return match && match[1] ? `https://www.youtube.com/embed/${match[1]}` : null;
-    }
-
-    // TECH NEWS & VIDEOS RENDER
-    function renderNews() {
-      const container = document.getElementById('news-container'); container.innerHTML = '';
-      if(news.length === 0) { container.innerHTML = '<div style="color:var(--text-muted)">Одоогоор мэдээ оруулаагүй байна.</div>'; return; }
-      news.forEach(n => {
-        const embedUrl = getYouTubeEmbedUrl(n.videoUrl);
-        const card = document.createElement('div'); card.className = 'news-card';
-        card.innerHTML = `
-          <div>
-            <div class="news-date">📅 ${n.date}</div>
-            <div class="news-title">${n.title}</div>
-            ${embedUrl ? `
-              <div class="news-video-box">
-                <iframe src="${embedUrl}" allowfullscreen></iframe>
-              </div>` : ''}
-            <div class="news-body">${n.body}</div>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
-
     // MATCHING & WORDLE & SPEED QUIZ
     let selectedLeft = null, selectedRight = null;
     function initMatchingGame() {
@@ -874,10 +1209,18 @@
     function switchTab(tabId) {
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-      event.target.classList.add('active'); document.getElementById(`tab-${tabId}`).classList.add('active');
+      
+      // TRACK SPECIFIC PAGE / TAB CLICK
+      pageViewsMap[tabId] = (pageViewsMap[tabId] || 0) + 1;
+      localStorage.setItem('ict9_page_views', JSON.stringify(pageViewsMap));
 
-      if(tabId === 'snake') drawSnake();
+      if(event && event.target) {
+        event.target.classList.add('active');
+      }
+      document.getElementById(`tab-${tabId}`).classList.add('active');
+
       if(tabId === 'news') renderNews();
+      if(tabId === 'snake') drawSnake();
       if(tabId === 'matching') initMatchingGame();
       if(tabId === 'word') initWordGame();
       if(tabId === 'speed') initSpeedQuiz();
@@ -900,7 +1243,7 @@
 
     function openAdmin() {
       if(prompt("Админ нууц үгээ оруулна уу:") === "1234") {
-        loadAdminStudents(); renderAdminChapters(); renderAdminQuestions(); renderAdminSnakeQuestions(); renderAdminNews();
+        renderReports(); loadAdminStudents(); renderAdminChapters(); renderAdminQuestions(); renderAdminNews(); renderAdminSnakeQuestions();
         document.getElementById('adminModal').classList.add('active');
       } else alert("Буруу код!");
     }
@@ -909,6 +1252,7 @@
       document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
       event.target.classList.add('active'); document.getElementById(`admin-${secId}`).classList.add('active');
+      if(secId === 'reports') renderReports();
     }
 
     function loadAdminStudents() {
@@ -928,6 +1272,67 @@
       });
     }
 
+    // ADMIN NEWS MANAGEMENT (ADD, EDIT, DELETE)
+    function addNews() {
+      const title = document.getElementById('new-n-title').value.trim();
+      const imgUrl = document.getElementById('new-n-img').value.trim();
+      const videoUrl = document.getElementById('new-n-url').value.trim();
+      const body = document.getElementById('new-n-body').value.trim();
+      const date = new Date().toISOString().split('T')[0];
+
+      if(!title || !body) return alert("Гарчиг болон Агуулга заавал шаардлагатай!");
+      news.unshift({ id: Date.now(), date, title, imgUrl, videoUrl, body });
+      localStorage.setItem('ict9_news', JSON.stringify(news));
+      document.getElementById('new-n-title').value = ''; 
+      document.getElementById('new-n-img').value = ''; 
+      document.getElementById('new-n-url').value = ''; 
+      document.getElementById('new-n-body').value = '';
+      renderAdminNews(); renderNews(); alert("Мэдээ хадгалагдлаа!");
+    }
+
+    function renderAdminNews() {
+      const div = document.getElementById('admin-news-list'); div.innerHTML = '';
+      news.forEach((n) => {
+        div.innerHTML += `
+          <div class="admin-item">
+            <div style="flex:1;">
+              <b>📰 ${n.title}</b> (${n.date})<br>
+              <span style="font-size:0.8rem; color:var(--text-muted);">${n.body.substring(0, 40)}...</span>
+            </div>
+            <div style="display:flex; gap:6px;">
+              <button class="edit-btn" onclick="editNews(${n.id})">✏️ Засах</button>
+              <button class="del-btn" onclick="deleteNews(${n.id})">Устгах</button>
+            </div>
+          </div>`;
+      });
+    }
+
+    function editNews(id) {
+      let item = news.find(n => n.id === id);
+      if(!item) return;
+      let newTitle = prompt("Мэдээний гарчиг:", item.title);
+      if(newTitle === null) return;
+      let newImg = prompt("Зургийн линк URL:", item.imgUrl || "");
+      if(newImg === null) return;
+      let newVideo = prompt("YouTube бичлэгийн линк URL:", item.videoUrl || "");
+      if(newVideo === null) return;
+      let newBody = prompt("Мэдээний эх текст:", item.body);
+      if(newBody === null) return;
+
+      item.title = newTitle.trim() || item.title;
+      item.imgUrl = newImg.trim();
+      item.videoUrl = newVideo.trim();
+      item.body = newBody.trim() || item.body;
+
+      localStorage.setItem('ict9_news', JSON.stringify(news));
+      renderAdminNews(); renderNews(); alert("Мэдээ амжилттай засагдлаа!");
+    }
+
+    function deleteNews(id) {
+      news = news.filter(n => n.id !== id); localStorage.setItem('ict9_news', JSON.stringify(news)); renderAdminNews(); renderNews();
+    }
+
+    // ADMIN QUESTIONS MANAGEMENT (ADD, EDIT, DELETE)
     function addQuestion() {
       let qCh = document.getElementById('new-q-chapter').value.trim() || "Бүлэг 1: Ерөнхий";
       let qText = document.getElementById('new-q-text').value.trim();
@@ -935,14 +1340,51 @@
       if(!qText || !qAns) return alert("Бөглөнө үү!");
       questions.push({ id: questions.length + 1, chapter: qCh, q: qText, a: qAns });
       localStorage.setItem('ict9_questions', JSON.stringify(questions)); populateChapterDropdown(); resetQuestions(); renderAdminQuestions();
+      document.getElementById('new-q-text').value = ''; document.getElementById('new-q-ans').value = '';
     }
 
     function renderAdminQuestions() {
       const div = document.getElementById('admin-questions-list'); div.innerHTML = '';
-      questions.forEach((q, i) => { div.innerHTML += `<div class="admin-item"><span><b>Q${i+1}:</b> ${q.q}</span><button class="del-btn" onclick="deleteQ(${q.id})">Устгах</button></div>`; });
+      questions.forEach((q, i) => {
+        div.innerHTML += `
+          <div class="admin-item">
+            <div style="flex:1;">
+              <span style="color:var(--accent-blue); font-size:0.8rem; font-weight:700;">[${q.chapter || 'Ерөнхий'}]</span><br>
+              <b>Q${i+1}:</b> ${q.q}<br>
+              <span style="color:var(--accent-green); font-size:0.85rem;">Зөв хариулт: ${q.a}</span>
+            </div>
+            <div style="display:flex; gap:6px;">
+              <button class="edit-btn" onclick="editQuestion(${q.id})">✏️ Засах</button>
+              <button class="del-btn" onclick="deleteQ(${q.id})">Устгах</button>
+            </div>
+          </div>`;
+      });
     }
+
+    function editQuestion(id) {
+      let qItem = questions.find(item => item.id === id);
+      if(!qItem) return;
+      let newChapter = prompt("Бүлэг сэдэв:", qItem.chapter || "");
+      if(newChapter === null) return;
+      let newQ = prompt("Асуултын бичвэр:", qItem.q);
+      if(newQ === null) return;
+      let newA = prompt("Зөв хариулт:", qItem.a);
+      if(newA === null) return;
+
+      qItem.chapter = newChapter.trim() || qItem.chapter;
+      qItem.q = newQ.trim() || qItem.q;
+      qItem.a = newA.trim() || qItem.a;
+
+      localStorage.setItem('ict9_questions', JSON.stringify(questions));
+      populateChapterDropdown();
+      resetQuestions();
+      renderAdminQuestions();
+      alert("Асуулт амжилттай засагдлаа!");
+    }
+
     function deleteQ(id) { questions = questions.filter(q => q.id !== id); localStorage.setItem('ict9_questions', JSON.stringify(questions)); populateChapterDropdown(); resetQuestions(); renderAdminQuestions(); }
 
+    // GAME QUESTIONS MANAGEMENT
     function addSnakeQuestion() {
       const qText = document.getElementById('new-sq-text').value.trim();
       const opt0 = document.getElementById('sq-opt-0').value.trim();
@@ -957,7 +1399,7 @@
       });
       localStorage.setItem('ict9_snake_questions', JSON.stringify(snakeQuestions));
       document.getElementById('new-sq-text').value = ''; document.getElementById('sq-opt-0').value = ''; document.getElementById('sq-opt-1').value = ''; document.getElementById('sq-opt-2').value = '';
-      renderAdminSnakeQuestions(); alert("Могойн асуулт хадгалагдлаа!");
+      renderAdminSnakeQuestions(); alert("Тоглоомын асуулт хадгалагдлаа!");
     }
 
     function renderAdminSnakeQuestions() {
@@ -969,33 +1411,6 @@
     }
 
     function deleteSnakeQ(idx) { snakeQuestions.splice(idx, 1); localStorage.setItem('ict9_snake_questions', JSON.stringify(snakeQuestions)); renderAdminSnakeQuestions(); }
-
-    // ADMIN NEWS & VIDEO MANAGEMENT
-    function addNews() {
-      const title = document.getElementById('new-n-title').value.trim();
-      const videoUrl = document.getElementById('new-n-url').value.trim();
-      const body = document.getElementById('new-n-body').value.trim();
-      const date = new Date().toISOString().split('T')[0];
-
-      if(!title || !body) return alert("Гарчиг ба Агуулга заавал шаардлагатай!");
-      news.unshift({ id: Date.now(), date, title, videoUrl, body });
-      localStorage.setItem('ict9_news', JSON.stringify(news));
-      document.getElementById('new-n-title').value = ''; 
-      document.getElementById('new-n-url').value = ''; 
-      document.getElementById('new-n-body').value = '';
-      renderAdminNews(); renderNews(); alert("Мэдээ/Бичлэг хадгалагдлаа!");
-    }
-
-    function renderAdminNews() {
-      const div = document.getElementById('admin-news-list'); div.innerHTML = '';
-      news.forEach((n, i) => {
-        div.innerHTML += `<div class="admin-item"><div><b>📰 ${n.title}</b> (${n.date}) ${n.videoUrl ? '📹 Бичлэгтэй' : ''}</div><button class="del-btn" onclick="deleteNews(${n.id})">Устгах</button></div>`;
-      });
-    }
-
-    function deleteNews(id) {
-      news = news.filter(n => n.id !== id); localStorage.setItem('ict9_news', JSON.stringify(news)); renderAdminNews(); renderNews();
-    }
 
     // INIT PAGE
     changeTheme(currentTheme);

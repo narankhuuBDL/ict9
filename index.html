@@ -2978,7 +2978,11 @@
         }
 
         function openActiveWheelCard() {
+           let wheelOptionAnswered = false;
+
+        function openActiveWheelCard() {
             if (!activeWheelStudent && !activeWheelQuestion) return;
+            wheelOptionAnswered = false;
             const card = document.getElementById('wheel-active-card');
             card.classList.remove('hidden');
 
@@ -3006,10 +3010,14 @@
 
                 if (validOpts.length >= 2) {
                     document.getElementById('wac-options').innerHTML = validOpts.map((opt, idx) => `
-                        <div class="p-3.5 rounded-2xl bg-white/10 border border-white/15 text-sm font-bold flex items-center gap-2.5">
-                            <span class="w-7 h-7 rounded-lg bg-indigo-500/40 flex items-center justify-center text-xs font-black">${letters[idx]}</span>
-                            <span>${escapeHtml(opt)}</span>
-                        </div>
+                        <button type="button" id="wac-opt-btn-${idx}" onclick="selectWheelMcqOption(${idx})"
+                            class="wac-opt-btn p-3.5 rounded-2xl bg-white/10 hover:bg-indigo-500/30 border-2 border-white/15 hover:border-indigo-400 text-left text-sm font-bold flex items-center justify-between gap-2.5 transition-all cursor-pointer">
+                            <div class="flex items-center gap-2.5">
+                                <span id="wac-opt-badge-${idx}" class="w-7 h-7 rounded-lg bg-indigo-500/40 flex items-center justify-center text-xs font-black shrink-0">${letters[idx]}</span>
+                                <span>${escapeHtml(opt)}</span>
+                            </div>
+                            <span id="wac-opt-icon-${idx}" class="text-base font-black"></span>
+                        </button>
                     `).join('');
                     const ansLetter = letters[activeWheelQuestion.ans] || 'A';
                     const ansText = validOpts[activeWheelQuestion.ans] || '';
@@ -3029,6 +3037,40 @@
             }
         }
 
+        function selectWheelMcqOption(selectedIdx) {
+            if (!activeWheelQuestion || wheelOptionAnswered) return;
+            wheelOptionAnswered = true;
+
+            const correctIdx = Number(activeWheelQuestion.ans) || 0;
+            const isCorrect = selectedIdx === correctIdx;
+            const btns = document.querySelectorAll('.wac-opt-btn');
+
+            btns.forEach((btn, idx) => {
+                const badge = document.getElementById(`wac-opt-badge-${idx}`);
+                const icon = document.getElementById(`wac-opt-icon-${idx}`);
+
+                if (idx === correctIdx) {
+                    btn.className = 'wac-opt-btn p-3.5 rounded-2xl bg-emerald-600/35 border-2 border-emerald-400 text-emerald-100 text-left text-sm font-black flex items-center justify-between gap-2.5 shadow-lg shadow-emerald-500/20 transition-all';
+                    if (badge) badge.className = 'w-7 h-7 rounded-lg bg-emerald-500 text-slate-950 flex items-center justify-center text-xs font-black shrink-0';
+                    if (icon) icon.textContent = '✅';
+                } else if (idx === selectedIdx && !isCorrect) {
+                    btn.className = 'wac-opt-btn p-3.5 rounded-2xl bg-rose-600/35 border-2 border-rose-400 text-rose-100 text-left text-sm font-black flex items-center justify-between gap-2.5 transition-all';
+                    if (badge) badge.className = 'w-7 h-7 rounded-lg bg-rose-500 text-white flex items-center justify-center text-xs font-black shrink-0';
+                    if (icon) icon.textContent = '❌';
+                } else {
+                    btn.className = 'wac-opt-btn p-3.5 rounded-2xl bg-white/5 border-2 border-white/10 text-white/50 text-left text-sm font-bold flex items-center justify-between gap-2.5 transition-all';
+                }
+            });
+
+            if (isCorrect) {
+                SoundFX.fanfare();
+            } else {
+                SoundFX.buzzer();
+            }
+
+            // Зөв хариулт болон монгол тайлбарыг автоматаар нээж харуулах
+            document.getElementById('wac-explain-box').classList.remove('hidden');
+        }
         function toggleWheelHint() {
             document.getElementById('wac-hint-box').classList.toggle('hidden');
         }

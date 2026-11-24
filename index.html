@@ -1300,10 +1300,16 @@
                 </div>
 
                 <!-- Admin Sub 4: JEOPARDY (АЛТАН ХОНХ) EDITOR -->
+                <!-- Admin Sub 4: JEOPARDY (АЛТАН ХОНХ) EDITOR -->
                 <div id="adm-view-jeopardy" class="hidden bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-5">
-                    <div>
-                        <h3 class="text-base font-black text-slate-900">🔔 Алтан Хонх (Jeopardy) Асуултын Сан Удирдах</h3>
-                        <p class="text-xs text-slate-500">5 баганын нэр болон 100, 200, 300 онооны асуулт, тусламж, хариултыг тусад нь засаж хадгална уу.</p>
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div>
+                            <h3 class="text-base font-black text-slate-900">🔔 Алтан Хонх (Jeopardy) Асуултын Сан Удирдах</h3>
+                            <p class="text-xs text-slate-500">Сэдэв (багана) болон онооны асуултуудыг чөлөөтэй нэмэх, засах, устгах боломжтой.</p>
+                        </div>
+                        <button onclick="addAdminJeopardyColumn()" class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-extrabold shadow-sm shrink-0">
+                            + Шинэ сэдэв (багана) нэмэх
+                        </button>
                     </div>
                     <div id="adm-jeopardy-editor-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
                 </div>
@@ -3370,8 +3376,12 @@
         }
 
         function renderJeopardyBoard() {
+            function renderJeopardyBoard() {
             const grid = document.getElementById('jeopardy-board-grid');
             if (!grid) return;
+            const cols = state.jeopardyBoard || [];
+            grid.style.gridTemplateColumns = `repeat(${Math.max(1, cols.length)}, minmax(140px, 1fr))`;
+            // ... үлдсэн код хэвээрээ
             grid.innerHTML = state.jeopardyBoard.map((col, cIdx) => `
                 <div class="space-y-2.5">
                     <div class="bg-indigo-950 text-white p-3.5 rounded-2xl text-center font-black text-xs sm:text-sm shadow">
@@ -5074,26 +5084,110 @@
         }
 
         /* --- Jeopardy Editor --- */
+        /* --- Jeopardy Editor (Засах, Нэмэх, Хасах) --- */
         function renderAdminJeopardyEditor() {
             const grid = document.getElementById('adm-jeopardy-editor-grid');
             if (!grid) return;
 
             grid.innerHTML = (state.jeopardyBoard || []).map((col, cIdx) => `
-                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
-                    <div>
-                        <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">Багана ${cIdx + 1} нэр</label>
-                        <input type="text" value="${escapeHtml(col.cat)}" onchange="updateAdminJeopardyCat(${cIdx}, this.value)" class="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs font-black text-indigo-900">
-                    </div>
-                    ${col.tiles.map((tile, tIdx) => `
-                        <div class="p-3 rounded-xl bg-white border border-slate-200 space-y-1.5">
-                            <div class="text-[11px] font-black text-amber-600">${tile.pts} ОНОО</div>
-                            <input type="text" value="${escapeHtml(tile.q)}" onchange="updateAdminJeopardyTile(${cIdx}, ${tIdx}, 'q', this.value)" placeholder="Асуулт..." class="w-full px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold">
-                            <input type="text" value="${escapeHtml(tile.hint)}" onchange="updateAdminJeopardyTile(${cIdx}, ${tIdx}, 'hint', this.value)" placeholder="Тусламж..." class="w-full px-2.5 py-1.5 rounded-lg border border-slate-200 text-[11px]">
-                            <input type="text" value="${escapeHtml(tile.ans)}" onchange="updateAdminJeopardyTile(${cIdx}, ${tIdx}, 'ans', this.value)" placeholder="Хариулт..." class="w-full px-2.5 py-1.5 rounded-lg border border-emerald-200 bg-emerald-50/40 text-xs font-bold">
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-end gap-2">
+                            <div class="flex-1">
+                                <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">Багана ${cIdx + 1} нэр</label>
+                                <input type="text" value="${escapeHtml(col.cat)}" onchange="updateAdminJeopardyCat(${cIdx}, this.value)" class="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs font-black text-indigo-900">
+                            </div>
+                            <button onclick="deleteAdminJeopardyColumn(${cIdx})" title="Энэ сэдвийг устгах" class="px-3 py-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-extrabold border border-rose-200">
+                                🗑️
+                            </button>
                         </div>
-                    `).join('')}
+
+                        ${col.tiles.map((tile, tIdx) => `
+                            <div class="p-3 rounded-xl bg-white border border-slate-200 space-y-1.5">
+                                <div class="flex items-center justify-between gap-2">
+                                    <div class="flex items-center gap-1">
+                                        <input type="number" step="50" min="50" value="${tile.pts}" onchange="updateAdminJeopardyTile(${cIdx}, ${tIdx}, 'pts', Number(this.value))" class="w-20 px-2 py-0.5 rounded-md border border-amber-300 bg-amber-50 text-[11px] font-black text-amber-700">
+                                        <span class="text-[11px] font-black text-amber-600">ОНОО</span>
+                                    </div>
+                                    <button onclick="deleteAdminJeopardyTile(${cIdx}, ${tIdx})" title="Асуулт устгах" class="text-[11px] font-extrabold text-rose-500 hover:text-rose-700 px-1.5 py-0.5 rounded hover:bg-rose-50">
+                                        ✕ Устгах
+                                    </button>
+                                </div>
+                                <input type="text" value="${escapeHtml(tile.q)}" onchange="updateAdminJeopardyTile(${cIdx}, ${tIdx}, 'q', this.value)" placeholder="Асуулт..." class="w-full px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold">
+                                <input type="text" value="${escapeHtml(tile.hint)}" onchange="updateAdminJeopardyTile(${cIdx}, ${tIdx}, 'hint', this.value)" placeholder="Тусламж..." class="w-full px-2.5 py-1.5 rounded-lg border border-slate-200 text-[11px]">
+                                <input type="text" value="${escapeHtml(tile.ans)}" onchange="updateAdminJeopardyTile(${cIdx}, ${tIdx}, 'ans', this.value)" placeholder="Хариулт..." class="w-full px-2.5 py-1.5 rounded-lg border border-emerald-200 bg-emerald-50/40 text-xs font-bold">
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <button onclick="addAdminJeopardyTile(${cIdx})" class="w-full py-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-xs font-extrabold transition-all">
+                        + Энэ сэдэвт асуулт нэмэх
+                    </button>
                 </div>
             `).join('');
+        }
+
+        function addAdminJeopardyColumn() {
+            const catName = prompt('Шинэ сэдвийн (баганын) нэрийг оруулна уу:', 'Шинэ сэдэв');
+            if (!catName || !catName.trim()) return;
+            state.jeopardyBoard.push({
+                cat: catName.trim(),
+                tiles: [
+                    { pts: 100, q: '100 онооны шинэ асуулт...', hint: 'Тусламж...', ans: 'Хариулт...', done: false },
+                    { pts: 200, q: '200 онооны шинэ асуулт...', hint: 'Тусламж...', ans: 'Хариулт...', done: false },
+                    { pts: 300, q: '300 онооны шинэ асуулт...', hint: 'Тусламж...', ans: 'Хариулт...', done: false }
+                ]
+            });
+            saveState(true);
+            renderAdminJeopardyEditor();
+            renderJeopardyBoard();
+            showToast(`"${catName.trim()}" сэдэв нэмэгдлээ!`, 'success');
+        }
+
+        function deleteAdminJeopardyColumn(cIdx) {
+            if ((state.jeopardyBoard || []).length <= 1) {
+                showToast('Хамгийн багадаа 1 сэдэв үлдэх ёстой!', 'error');
+                return;
+            }
+            const colName = state.jeopardyBoard[cIdx]?.cat || '';
+            if (!confirm(`"${colName}" сэдвийг бүх асуултын хамт устгах уу?`)) return;
+            state.jeopardyBoard.splice(cIdx, 1);
+            saveState(true);
+            renderAdminJeopardyEditor();
+            renderJeopardyBoard();
+            showToast('Сэдэв устгагдлаа.', 'info');
+        }
+
+        function addAdminJeopardyTile(cIdx) {
+            const col = state.jeopardyBoard[cIdx];
+            if (!col) return;
+            const maxPts = col.tiles.reduce((m, t) => Math.max(m, Number(t.pts) || 0), 0);
+            const nextPts = maxPts + 100;
+            col.tiles.push({
+                pts: nextPts,
+                q: `${nextPts} онооны шинэ асуулт...`,
+                hint: 'Тусламж...',
+                ans: 'Хариулт...',
+                done: false
+            });
+            saveState(true);
+            renderAdminJeopardyEditor();
+            renderJeopardyBoard();
+            showToast(`${nextPts} онооны асуулт нэмэгдлээ!`, 'success');
+        }
+
+        function deleteAdminJeopardyTile(cIdx, tIdx) {
+            const col = state.jeopardyBoard[cIdx];
+            if (!col || !col.tiles[tIdx]) return;
+            if (col.tiles.length <= 1) {
+                showToast('Сэдэв бүрд дор хаяж 1 асуулт байх ёстой!', 'error');
+                return;
+            }
+            col.tiles.splice(tIdx, 1);
+            saveState(true);
+            renderAdminJeopardyEditor();
+            renderJeopardyBoard();
+            showToast('Асуулт устгагдлаа.', 'info');
         }
 
         function updateAdminJeopardyCat(cIdx, val) {
@@ -5102,6 +5196,14 @@
             saveState(true);
             renderJeopardyBoard();
             showToast('Алтан хонхны ангиллын нэр хадгалагдлаа!', 'success');
+        }
+
+        function updateAdminJeopardyTile(cIdx, tIdx, field, val) {
+            if (!state.jeopardyBoard[cIdx]?.tiles[tIdx]) return;
+            state.jeopardyBoard[cIdx].tiles[tIdx][field] = typeof val === 'number' ? (val || 100) : val.trim();
+            saveState(true);
+            renderJeopardyBoard();
+            showToast('Алтан хонхны асуулт хадгалагдлаа!', 'success');
         }
 
         function updateAdminJeopardyTile(cIdx, tIdx, field, val) {

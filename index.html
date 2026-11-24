@@ -5085,6 +5085,7 @@
 
         /* --- Jeopardy Editor --- */
         /* --- Jeopardy Editor (Засах, Нэмэх, Хасах) --- */
+  /* --- Jeopardy Editor (Засах, Нэмэх, Хасах) --- */
         function renderAdminJeopardyEditor() {
             const grid = document.getElementById('adm-jeopardy-editor-grid');
             if (!grid) return;
@@ -5201,14 +5202,6 @@
         function updateAdminJeopardyTile(cIdx, tIdx, field, val) {
             if (!state.jeopardyBoard[cIdx]?.tiles[tIdx]) return;
             state.jeopardyBoard[cIdx].tiles[tIdx][field] = typeof val === 'number' ? (val || 100) : val.trim();
-            saveState(true);
-            renderJeopardyBoard();
-            showToast('Алтан хонхны асуулт хадгалагдлаа!', 'success');
-        }
-
-        function updateAdminJeopardyTile(cIdx, tIdx, field, val) {
-            if (!state.jeopardyBoard[cIdx]?.tiles[tIdx]) return;
-            state.jeopardyBoard[cIdx].tiles[tIdx][field] = val.trim();
             saveState(true);
             renderJeopardyBoard();
             showToast('Алтан хонхны асуулт хадгалагдлаа!', 'success');
